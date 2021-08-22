@@ -20,4 +20,6 @@ def moscow_time() -> datetime:
 
 def test_web_app(http_client, moscow_time) -> None:
     response: Response = http_client.get("/")
-    assert response.status_code == 200 and response.data.decode('ascii') == moscow_time.time().strftime("%H:%M:%S")
+    assert response.status_code == 200 and response.data.decode(
+        "ascii"
+    ) == moscow_time.time().strftime("%H:%M:%S")
