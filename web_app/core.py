@@ -1,6 +1,6 @@
 from flask import Flask
 
-from . import helpers
+import helpers
 
 app = Flask(__name__)
 
