@@ -8,7 +8,7 @@ with open("LICENSE") as f:
 
 setup(
     name="Simple web app to show current time in Moscow",
-    version="0.0.1",
+    version="0.1.0",
     description="Simple web app to show current time in Moscow",
     long_description=readme,
     author="Iskander Salimzhanov",

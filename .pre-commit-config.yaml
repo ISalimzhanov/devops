@@ -8,26 +8,26 @@ repos:
       - id: end-of-file-fixer
         exclude: LICENSE
 
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v2.24.0
+  - repo: local
     hooks:
       - id: pyupgrade
         name: pyupgrade
         entry: poetry run pyupgrade
         types: [ python ]
+        language: system
 
-  - repo: https://github.com/psf/black
-    rev: 21.7b0
+  - repo: local
     hooks:
       - id: black
         name: black
         entry: poetry run black
         types: [ python ]
+        language: system
 
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.9.3
+  - repo: local
     hooks:
       - id: isort
         name: isort
         entry: poetry run isort
         types: [ python ]
+        language: system
