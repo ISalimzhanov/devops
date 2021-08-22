@@ -1,6 +1,6 @@
 FROM python:3.9-slim-buster
 
-RUN python -m pip install poetry
+RUN python3 -m pip install poetry
 RUN mkdir /app
 WORKDIR /app
 

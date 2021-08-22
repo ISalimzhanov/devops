@@ -1,6 +1,5 @@
-from flask import Flask
-
 import helpers
+from flask import Flask
 
 app = Flask(__name__)
 
@@ -11,4 +10,4 @@ def main() -> str:
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0")

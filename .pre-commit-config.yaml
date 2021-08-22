@@ -1,4 +1,4 @@
-default_stages: [push]
+default_stages: [ commit, push ]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -28,6 +28,6 @@ repos:
     hooks:
       - id: isort
         name: isort
-        entry: poetry run isort
+        entry: poetry run isort .
         types: [ python ]
         language: system
