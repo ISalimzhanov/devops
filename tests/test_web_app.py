@@ -1,11 +1,10 @@
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 import pytest
-import pytz
 from flask import Response
 from flask.testing import FlaskClient
 
-import web_app
+from .context import web_app
 
 
 @pytest.fixture
@@ -15,7 +14,7 @@ def http_client() -> FlaskClient:
 
 @pytest.fixture
 def moscow_time() -> datetime:
-    yield datetime.now(pytz.timezone("Europe/Moscow"))
+    yield datetime.now(timezone(timedelta(hours=3)))
 
 
 def test_web_app(http_client, moscow_time) -> None:

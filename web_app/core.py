@@ -1,5 +1,6 @@
-import helpers
 from flask import Flask
+
+import web_app.helpers as helpers
 
 app = Flask(__name__)
 

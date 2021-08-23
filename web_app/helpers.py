@@ -1,8 +1,6 @@
-from datetime import datetime
-
-import pytz
+from datetime import datetime, timedelta, timezone
 
 
 def get_moscow_time() -> str:
-    tz = pytz.timezone("Europe/Moscow")
+    tz = timezone(timedelta(hours=3))
     return datetime.now(tz).time().strftime("%H:%M:%S")

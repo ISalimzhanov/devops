@@ -1,6 +1,6 @@
 version: "3.0"
 services:
   app:
-    image: "41694/devops_lab1"
+    build: .
     ports:
       - '3020:5000'

@@ -3,3 +3,4 @@
 * Lightweight image using python:3.9-slim-buster
 * Exclude unwanted files and directories by .dockerignore
 * Directly exposing ports: using EXPOSE 5000
+* Multistaging to make final image smaller
