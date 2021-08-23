@@ -1,27 +1,18 @@
-FROM python:3.9-slim-buster AS builder
+FROM python:3.9-slim-buster
 
+RUN python -m pip install poetry
+RUN mkdir /app
 WORKDIR /app
 
 COPY pyproject.toml .
 COPY poetry.lock .
+COPY requirements.txt .
 
-RUN python3 -m venv /venv
-RUN python3 -m pip install poetry
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
-RUN /venv/bin/pip install -r requirements.txt
-
-FROM python:3.9-slim-buster AS app
-
-RUN useradd -m myuser && \
-    mkdir /app && \
-    chown -R myuser /app
-USER myuser
+RUN pip3 install -r requirements.txt
 
 COPY . /app
-WORKDIR /app
 
-COPY --from=builder /venv /venv
-
-CMD [ "python", "web_app/core.py" ]
+CMD [ "python", "run.py" ]
 
 EXPOSE 5000
