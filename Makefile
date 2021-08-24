@@ -7,12 +7,34 @@ SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = .
 BUILDDIR      = _build
+PYTHON := python3
+DOCKER_IMAGE := 41694/devops_lab1:latest
 
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 .PHONY: help Makefile
+
+.PHONY: test
+test:
+	poetry run pytest
+
+.PHONY: install
+install:
+	$(PYTHON) -m venv /venv
+	$(PYTHON) -m pip install wheel setuptools
+	poetry export -f requirements.txt --output requirements.txt --without-hashes
+	/venv/bin/pip install -r requirements.txt
+
+.PHONY: purify
+purify:
+	poetry run pre-commit run --all-files
+
+.PHONY: docker-build
+docker-build:
+	docker build . -t $(DOCKER_IMAGE)
+
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

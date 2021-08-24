@@ -1,18 +1,34 @@
-FROM python:3.9-slim-buster
+FROM python:3.8-alpine as builder
 
-RUN python -m pip install poetry
-RUN mkdir /app
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
+
+RUN apk add --no-cache make build-base openssl-dev libffi-dev && python3 -m pip install poetry
+
 WORKDIR /app
 
 COPY pyproject.toml .
 COPY poetry.lock .
-COPY requirements.txt .
+COPY Makefile .
 
-RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
-RUN pip3 install -r requirements.txt
+RUN make install
 
-COPY . /app
+FROM python:3.8-alpine AS app
 
-CMD [ "python", "run.py" ]
+RUN apk add --no-cache libffi openssl
+
+RUN adduser -D myuser && \
+    mkdir /app && \
+    mkdir /venv && \
+    chown -R myuser /app && \
+    chown myuser /venv
+USER myuser
+
+COPY --from=builder /venv /venv
+
+COPY . /app/
+
+WORKDIR /app
+
+CMD ["/venv/bin/python", "run.py"]
 
 EXPOSE 5000
