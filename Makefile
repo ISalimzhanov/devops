@@ -22,10 +22,9 @@ test:
 
 .PHONY: install
 install:
-	$(PYTHON) -m venv /venv
 	$(PYTHON) -m pip install wheel setuptools
 	poetry export -f requirements.txt --output requirements.txt --without-hashes
-	/venv/bin/pip install -r requirements.txt
+	$(PYTHON) -m pip install -r requirements.txt
 
 .PHONY: lint
 lint:

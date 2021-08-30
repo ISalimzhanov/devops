@@ -10,6 +10,7 @@ COPY pyproject.toml .
 COPY poetry.lock .
 COPY Makefile .
 
+RUN -m venv /venv
 RUN make install
 
 FROM python:3.8-alpine AS app
