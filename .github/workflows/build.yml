@@ -22,7 +22,7 @@ jobs:
       - name: Install poetry
         run: python3 -m pip install poetry
       - name: Install dependencies
-        run: sudo make install
+        run: make install
       - name: Cache pip
         uses: actions/cache@v2
         with:
@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-pip-
             ${{ runner.os }}-
       - name: Test with pytest
-        run: sudo make test
+        run: make test
       - name: Upload test results
         uses: actions/upload-artifact@v2
         with:
@@ -43,7 +43,7 @@ jobs:
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
       - name: Lint
-        run: sudo make lint
+        run: make lint
       - name: Build package
         run: python -m build
       - name: Publish package
