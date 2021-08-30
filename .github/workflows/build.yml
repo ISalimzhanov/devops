@@ -7,6 +7,11 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        poetry-version: [ 1.0, 1.1.6 ]
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.8
@@ -19,6 +24,10 @@ jobs:
       # You can test your matrix by printing the current Python version
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+      - name: Run image
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
       - name: Install dependencies
         run: sudo make install
       - name: Cache pip
@@ -32,7 +41,7 @@ jobs:
             ${{ runner.os }}-pip-
             ${{ runner.os }}-
       - name: Test with pytest
-        run: pytest
+        run: sudo make test
       - name: Upload test results
         uses: actions/upload-artifact@v2
         with:

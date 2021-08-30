@@ -22,7 +22,6 @@ test:
 
 .PHONY: install
 install:
-	$(PYTHON) -m pip install poetry
 	$(PYTHON) -m venv /venv
 	$(PYTHON) -m pip install wheel setuptools
 	poetry export -f requirements.txt --output requirements.txt --without-hashes
