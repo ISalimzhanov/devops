@@ -48,6 +48,3 @@ jobs:
         run: make build
       - name: Publish package
         run: make publish
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
