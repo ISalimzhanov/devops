@@ -10,8 +10,7 @@ COPY pyproject.toml .
 COPY poetry.lock .
 COPY Makefile .
 
-RUN -m venv /venv
-RUN make install
+RUN python3 -m venv /venv && make install PYTHON=/venv/bin/python3
 
 FROM python:3.8-alpine AS app
 
@@ -32,4 +31,4 @@ WORKDIR /app
 
 CMD ["/venv/bin/python", "run.py"]
 
-EXPOSE 5000
+EXPOSE 8080

@@ -34,6 +34,14 @@ lint:
 docker-build:
 	docker build . -t $(DOCKER_IMAGE)
 
+.PHONY: build
+docker-build:
+	poetry build
+
+.PHONY: publish
+docker-build:
+	poetry publish
+
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
