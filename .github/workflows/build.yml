@@ -19,6 +19,8 @@ jobs:
       # You can test your matrix by printing the current Python version
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+      - name: Install dependencies
+        run: sudo make install
       - name: Cache pip
         uses: actions/cache@v2
         with:
@@ -29,10 +31,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
             ${{ runner.os }}-
-      - name: Install dependencies
-        run: sudo make install
       - name: Test with pytest
-        run: sudo make test
+        run: pytest
       - name: Upload test results
         uses: actions/upload-artifact@v2
         with:
@@ -47,5 +47,5 @@ jobs:
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
         with:
-            user: __token__
-            password: ${{ secrets.PYPI_API_TOKEN }}
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
