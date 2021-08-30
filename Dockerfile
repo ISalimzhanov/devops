@@ -2,7 +2,7 @@ FROM python:3.8-alpine as builder
 
 ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
-RUN apk add --no-cache make build-base openssl-dev libffi-dev && python3 -m pip install poetry
+RUN apk add --no-cache make build-base openssl-dev libffi-dev
 
 WORKDIR /app
 
