@@ -30,7 +30,7 @@ docker-compose up
 python run.py
 ```
 
-## Testing
+## Unit testing
 [Pytest](https://docs.pytest.org) is used for testing </br>
 Use following command to launch testing
 ```

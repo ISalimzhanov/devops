@@ -27,8 +27,8 @@ install:
 	poetry export -f requirements.txt --output requirements.txt --without-hashes
 	/venv/bin/pip install -r requirements.txt
 
-.PHONY: purify
-purify:
+.PHONY: lint
+lint:
 	poetry run pre-commit run --all-files
 
 .PHONY: docker-build
