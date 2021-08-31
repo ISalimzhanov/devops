@@ -3,14 +3,14 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                python3 -m venv /venv && make install PYTHON=/venv/bin/python3
+                sh "python3 -m venv /venv && make install PYTHON=/venv/bin/python3"
             }
         }
         stage('test'){
             steps {
-                pushd ..
-                make test
-                popd
+                sh "pushd .."
+                sh "make test"
+                sh "popd"
             }
         }
     }
