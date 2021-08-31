@@ -1,9 +1,19 @@
 pipeline {
-    agent { docker { image 'python:3.5.1' } }
+    agent { docker { image 'python:3.8-alpine' } }
     stages {
         stage('build') {
             steps {
                 sh 'python --version'
+            }
+            steps {
+                python3 -m venv /venv && make install PYTHON=/venv/bin/python3
+            }
+        }
+        stage('test'){
+            steps {
+                pushd ..
+                make test
+                popd
             }
         }
     }
