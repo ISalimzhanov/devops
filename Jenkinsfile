@@ -21,7 +21,6 @@ pipeline {
           steps {
             sh 'poetry run pyupgrade'
             sh 'poetry run black .'
-            sh 'poetry run isort --settings-path pyproject.toml'
           }
         }
 
