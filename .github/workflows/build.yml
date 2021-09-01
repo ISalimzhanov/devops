@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build the Docker image
         run: |
-          docker build 41694/devops_lab1:latest
+          docker run 41694/devops_lab1:latest
       - name: Cache pip
         uses: actions/cache@v2
         with:
