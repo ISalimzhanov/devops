@@ -11,7 +11,9 @@ pipeline {
       steps {
         sh 'apk add --no-cache make build-base openssl-dev libffi-dev'
         sh 'python3 -m pip install poetry'
-        sh 'python3 -m venv /venv && make install PYTHON=/venv/bin/python3'
+        dir(path: '.'){
+            sh 'python3 -m venv /venv && make install PYTHON=/venv/bin/python3'
+        }
       }
     }
 
