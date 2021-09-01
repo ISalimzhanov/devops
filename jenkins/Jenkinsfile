@@ -1,14 +1,14 @@
 pipeline {
-  agent none
-
+  agent {
+    dockerfile{
+        image 'python:3.8-alpine'
+    }
+  }
   stages {  // Define the individual processes, or stages, of your CI pipeline
-    stage("Docker") {
-        agent {
-            dockerfile{
-                label 'slave-label'
-                dir 'Dockerfile'
-            }
-        }
+    stage('Install dependencies'){
+        sh """
+            python3 -m venv /venv && make install PYTHON=/venv/bin/python3
+        """
     }
     stage('Linting') { // Run pylint against your code
       steps {
