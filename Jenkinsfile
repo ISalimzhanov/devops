@@ -8,13 +8,17 @@ pipeline {
   stages {
     stage('Linting') {
       steps {
-        sh 'make lint'
+        sh '''pushd ..
+make lint
+popd '''
       }
     }
 
     stage('Testing') {
       steps {
-        sh 'make test'
+        sh '''pushd ..
+make test
+popd '''
       }
     }
 
