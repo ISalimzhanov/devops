@@ -16,20 +16,16 @@ pipeline {
     }
 
     stage('Linting') {
-      parallel {
-        stage('Linting') {
-          steps {
-            sh '''make lint
+      steps {
+        sh '''make lint
 '''
-          }
-        }
+      }
+    }
 
-        stage('Testing') {
-          steps {
-            sh 'make test'
-          }
-        }
-
+    stage('Testing') {
+      steps {
+        sh '''make test
+'''
       }
     }
 
