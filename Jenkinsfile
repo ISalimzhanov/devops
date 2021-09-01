@@ -2,6 +2,7 @@ pipeline {
   agent {
     docker {
       image 'python:3.8-alpine'
+      args '-u root: root'
     }
 
   }
@@ -14,15 +15,20 @@ pipeline {
     }
 
     stage('Linting') {
-      steps {
-        sh '''make lint
+      parallel {
+        stage('Linting') {
+          steps {
+            sh '''make lint
 '''
-      }
-    }
+          }
+        }
 
-    stage('Testing') {
-      steps {
-        sh 'make test'
+        stage('Testing') {
+          steps {
+            sh 'make test'
+          }
+        }
+
       }
     }
 
