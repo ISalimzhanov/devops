@@ -34,13 +34,10 @@ lint:
 docker-build:
 	docker build . -t $(DOCKER_IMAGE)
 
-.PHONY: build
-docker-build:
-	poetry build
+.PHOMY: ci-install
+ci-install:
+	poetry install --no-dev
 
-.PHONY: publish
-docker-build:
-	poetry publish
 
 
 # Catch-all target: route all unknown targets to Sphinx using the new
