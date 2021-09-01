@@ -2,7 +2,6 @@ pipeline {
   agent {
     docker {
       image 'python:3.8-alpine'
-      args '-u root:root'
     }
 
   }
@@ -32,6 +31,9 @@ pipeline {
 
       }
     }
+  }
 
+  environment {
+    CRYPTOGRAPHY_DONT_BUILD_RUST = '1'
   }
 }
