@@ -9,13 +9,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Build the Docker image
-        run: |
-          docker run 41694/devops_lab1:latest
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+          architecture: 'x64'
+      - name: Install poetry
+        run: python3 -m pip install poetry
+      - name: Install dependencies
+        run: make install
       - name: Cache pip
         uses: actions/cache@v2
         with:
+          # This path is specific to Ubuntu
           path: ~/.cache/pip
+          # Look to see if there is a cache hit for the corresponding requirements file
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
@@ -27,6 +35,7 @@ jobs:
         with:
           name: pytest-results-${{ matrix.python-version }}
           path: junit/test-results-${{ matrix.python-version }}.xml
+        # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
       - name: Lint
         run: make lint
