@@ -16,16 +16,22 @@ pipeline {
     }
 
     stage('Linting') {
-      steps {
-        sh '''make lint
-'''
-      }
-    }
+      parallel {
+        stage('Linting') {
+          steps {
+            sh 'poetry run pyupgrade'
+            sh 'poetry run black .'
+            sh 'poetry run isort --settings-path pyproject.toml'
+          }
+        }
 
-    stage('Testing') {
-      steps {
-        sh '''make test
+        stage('Testing') {
+          steps {
+            sh '''make test
 '''
+          }
+        }
+
       }
     }
 
