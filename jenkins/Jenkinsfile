@@ -2,11 +2,6 @@ pipeline {
   agent any
   stages {
     stage("Build"){
-        steps {
-            sh """
-                sudo systemctl start docker.service
-            """
-        }
         agent {
             docker {
                 image '41694/devops_lab1'
