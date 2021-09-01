@@ -12,7 +12,9 @@ jobs:
       - name: Build the Docker image
         run: |
           pushd ..
+          pushd ..
           docker build . --file Dockerfile
+          popd
           popd
       - name: Cache pip
         uses: actions/cache@v2
