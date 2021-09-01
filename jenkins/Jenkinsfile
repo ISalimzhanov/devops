@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    dockerfile{
+    docker {
         image '41694/devops_lab1'
         label 'devops'
     }
