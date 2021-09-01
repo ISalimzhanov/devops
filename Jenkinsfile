@@ -1,14 +1,22 @@
 pipeline {
   agent {
     docker {
-      image '41694/devops_lab1'
+      image 'python:3.8-alpine'
     }
 
   }
   stages {
+    stage('Build') {
+      steps {
+        sh 'apk add --no-cache make build-base openssl-dev libffi-dev && python3 -m pip install poetry'
+        sh 'python3 -m venv /venv && make install PYTHON=/venv/bin/python3'
+      }
+    }
+
     stage('Linting') {
       steps {
-        sh 'make lint'
+        sh '''make lint
+'''
       }
     }
 
