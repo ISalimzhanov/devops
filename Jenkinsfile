@@ -9,16 +9,17 @@ pipeline {
     stage('Linting') {
       steps {
         sh '''pushd ..
-make lint
-popd '''
+'''
+        sh 'make lint'
+        sh 'popd '
       }
     }
 
     stage('Testing') {
       steps {
-        sh '''pushd ..
-make test
-popd '''
+        sh 'pushd ..'
+        sh 'make test'
+        sh 'popd'
       }
     }
 
