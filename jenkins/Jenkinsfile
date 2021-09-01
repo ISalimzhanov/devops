@@ -1,19 +1,11 @@
 pipeline {
   agent {
     dockerfile{
-        image 'python:3.8-alpine'
+        image '41694/devops_lab1'
+        label 'devops'
     }
   }
-  stages {  // Define the individual processes, or stages, of your CI pipeline
-    stage('Install dependencies'){
-      steps {
-       script {
-         sh """
-          python3 -m venv /venv && make install PYTHON=/venv/bin/python3
-          """
-         }
-       }
-    }
+  stages {
     stage('Linting') { // Run pylint against your code
       steps {
         script {
