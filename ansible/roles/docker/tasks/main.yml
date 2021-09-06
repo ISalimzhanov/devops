@@ -1,10 +1,9 @@
-- name: 'Install docker dependencies'
-  apt:
-    name: '{{ item }}'
-    state: 'present'
-  with_items:
-    - 'apt-transport-https'
-    - 'ca-certificates'
+- name: 'Install aptitude using apt'
+  apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+- name: 'Install required system packages'
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
 
 - name: 'Add docker repo apt key'
   apt_key:
@@ -22,7 +21,7 @@
 
 - name: 'Install docker'
   apt:
-    name: 'docker-ce={{ docker_version }}'
+    name: 'docker-ce'
     state: 'present'
 
 - name: 'Enable docker systemd service'

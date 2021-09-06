@@ -1,3 +1,9 @@
+- name: 'Create destination directory'
+  file:
+    path: "{{ app_directory }}"
+    state: directory
+    mode: 0644
+
 - name: 'Copy docker-compose files'
   copy:
     src: templates/{{ item }}
@@ -6,6 +12,13 @@
   loop:
     - docker-compose.yml
 
-- name: 'Deploy docker-compose stack'
+- name: install pip3
+  apt: name=python3-pip state=present
+
+- name: Install python-docker
+  pip:
+    name: docker-compose
+
+- name: 'Up docker-compose'
   docker_compose:
     project_src: "{{  app_directory  }}"
