@@ -1,0 +1,10 @@
+- name: 'Delete docker_compose if exists'
+  file:
+    path: "/usr/local/bin/docker_compose"
+    state: absent
+
+- name: 'Install docker_compose'
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker_compose-Linux-x86_64"
+    dest: /usr/local/bin/docker_compose
+    mode: 'u+x,g+x'

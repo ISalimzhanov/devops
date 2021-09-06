@@ -1,0 +1,4 @@
+- name: Deploy app
+  hosts: all
+  roles: [docker, docker_compose, app_python]
+  become: true

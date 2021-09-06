@@ -1,0 +1,11 @@
+- name: 'Copy docker-compose files'
+  copy:
+    src: templates/{{ item }}
+    dest: "{{ app_directory }}/{{ item }}"
+    mode: 0644
+  loop:
+    - docker-compose.yml
+
+- name: 'Deploy docker-compose stack'
+  docker_compose:
+    project_src: "{{  app_directory  }}"

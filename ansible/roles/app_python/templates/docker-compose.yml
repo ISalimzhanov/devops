@@ -1,6 +1,6 @@
 version: "3.0"
 services:
   app:
-    build: .
+    image: '41694/dovops_lab1'
     ports:
       - '3020:5000'
