@@ -17,7 +17,7 @@ services:
       - loki
 
   loki:
-    container_name: "monitoring.loki"
+    container_name: "prometheus.loki"
     image: grafana/loki:1.6.0
     ports:
       - "3100:3100"
@@ -28,7 +28,7 @@ services:
       - loki
 
   promtail:
-    container_name: "monitoring.promtail"
+    container_name: "prometheus.promtail"
     image: grafana/promtail:1.6.0
     volumes:
       - /var/lib/docker/containers/:/var/lib/docker/containers
@@ -38,9 +38,26 @@ services:
       - loki
 
   grafana:
-    container_name: "monitoring.grafana"
+    container_name: "prometheus.grafana"
     image: grafana/grafana:master
     ports:
       - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
     networks:
       - loki
+
+  prometheus:
+    image: prom/prometheus:v2.29.0
+    container_name: "monitoring.prometheus"
+    volumes:
+      - ./prometheus/prometheus-config.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    networks:
+      - loki
+
+volumes:
+  grafana-data: { }
