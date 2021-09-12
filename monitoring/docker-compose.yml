@@ -1,0 +1,46 @@
+version: '3.7'
+
+networks:
+  loki:
+
+services:
+  app:
+    container_name: "app_python"
+    image: 41694/dovops_lab1:latest
+    logging:
+      driver: "json-file"
+      options:
+        tag: "{{.ImageName}}|{{.Name}}"
+    ports:
+      - '8080:8080'
+    networks:
+      - loki
+
+  loki:
+    container_name: "monitoring.loki"
+    image: grafana/loki:1.6.0
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki/loki-config.yml:/etc/loki-config.yml
+    command: -config.file=/etc/loki/local-config.yaml -print-config-stderr=true
+    networks:
+      - loki
+
+  promtail:
+    container_name: "monitoring.promtail"
+    image: grafana/promtail:1.6.0
+    volumes:
+      - /var/lib/docker/containers/:/var/lib/docker/containers
+      - ./promtail/promtail-config.yml:/etc/promtail/docker-config.yml
+    command: -config.file=/etc/promtail/docker-config.yml
+    networks:
+      - loki
+
+  grafana:
+    container_name: "monitoring.grafana"
+    image: grafana/grafana:master
+    ports:
+      - "3000:3000"
+    networks:
+      - loki

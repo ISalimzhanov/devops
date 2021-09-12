@@ -3,4 +3,4 @@ services:
   app:
     image: '41694/dovops_lab1'
     ports:
-      - '3020:5000'
+      - '8080:8080'
