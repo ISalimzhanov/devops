@@ -12,4 +12,4 @@
 * Loki dashboard
 ![loki](https://github.com/ISalimzhanov/devops/blob/main/monitoring/screenshot/loki.png)
 * Prometheus dashboard
-![prometheus](https://github.com/ISalimzhanov/devops/blob/main/monitoring/screenshot/loki.png)
+![prometheus](https://github.com/ISalimzhanov/devops/blob/main/monitoring/screenshot/prometheus.png)
