@@ -1,0 +1,8 @@
+NAME                       READY   STATUS    RESTARTS   AGE
+pod/app-6b855bd488-dnzlk   1/1     Running   0          78s
+pod/app-6b855bd488-j7969   1/1     Running   0          78s
+pod/app-6b855bd488-xrfg2   1/1     Running   0          78s
+
+NAME                 TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+service/app          LoadBalancer   10.96.130.235   <pending>     8080:32012/TCP   49s
+service/kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          144m
