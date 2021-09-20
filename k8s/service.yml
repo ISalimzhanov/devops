@@ -3,36 +3,8 @@ apiVersion: v1
 metadata:
   name: app
   namespace: default
-  uid: e3d5e1db-065f-49f1-ba8e-1aa9ae926269
-  resourceVersion: '6059'
-  creationTimestamp: '2021-09-20T19:03:46Z'
   labels:
     app: app
-  managedFields:
-    - manager: kubectl-expose
-      operation: Update
-      apiVersion: v1
-      time: '2021-09-20T19:03:46Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:metadata:
-          f:labels:
-            .: {}
-            f:app: {}
-        f:spec:
-          f:allocateLoadBalancerNodePorts: {}
-          f:externalTrafficPolicy: {}
-          f:internalTrafficPolicy: {}
-          f:ports:
-            .: {}
-            k:{"port":8080,"protocol":"TCP"}:
-              .: {}
-              f:port: {}
-              f:protocol: {}
-              f:targetPort: {}
-          f:selector: {}
-          f:sessionAffinity: {}
-          f:type: {}
 spec:
   ports:
     - protocol: TCP
@@ -41,16 +13,9 @@ spec:
       nodePort: 32012
   selector:
     app: app
-  clusterIP: 10.96.130.235
-  clusterIPs:
-    - 10.96.130.235
   type: LoadBalancer
-  sessionAffinity: None
-  externalTrafficPolicy: Cluster
   ipFamilies:
     - IPv4
   ipFamilyPolicy: SingleStack
-  allocateLoadBalancerNodePorts: true
-  internalTrafficPolicy: Cluster
 status:
-  loadBalancer: {}
+  loadBalancer: { }
