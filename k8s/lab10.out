@@ -1,0 +1,8 @@
+NAME                                READY   STATUS    RESTARTS     AGE
+pod/dev-your-app-7cddc57879-gv9w8   0/1     Running   3 (9s ago)   3m9s
+pod/dev-your-app-7cddc57879-qk287   0/1     Running   3 (9s ago)   3m9s
+pod/dev-your-app-7cddc57879-vnh42   0/1     Running   3 (9s ago)   3m9s
+
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/dev-your-app   ClusterIP   10.97.111.106   <none>        80/TCP    3m10s
+service/kubernetes     ClusterIP   10.96.0.1       <none>        443/TCP   3h9m
